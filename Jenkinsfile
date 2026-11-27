@@ -19,4 +19,16 @@ pipeline {
             }
         }
     }
+    stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonar-lab') {
+            sh '''
+              mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+                -Dsonar.projectKey=bankapp-gate \
+                -Dsonar.projectName=bankapp-gate \
+                -Dsonar.branch.name=${CHANGE_BRANCH:-$BRANCH_NAME}
+            '''
+        }
+    }
+}
 }
