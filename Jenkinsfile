@@ -1,5 +1,5 @@
 pipeline {
-    agent {'vcm'}
+    agent { label 'vcm' }
 
     stages {
         stage('Hello') {
